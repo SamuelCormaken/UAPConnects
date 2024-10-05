@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from tidehunter import views as acc_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('forum/', acc_views.forum, name="forum"),
+    path('registration/', acc_views.registration, name="registration")
 ]
