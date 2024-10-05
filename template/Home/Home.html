@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+   <style>
+        *{
+            margin:0px;
+
+        }
+        body{
+            background:linear-gradient(to right,#060B26,#2A2C39);
+        }
+      
+        .container-fluid{
+                color:white;   
+                display: flex;
+                justify-content: space-between; /* This will evenly distribute space between the divs */
+                width: 100vw; /* Make the container take the entire width of the viewport */
+                height: 100vh;
+            }
+        .forum a{
+            display:flex; 
+            margin-left:10px;
+            height:3rem;
+            align-items: center;
+        }
+        .side-forum{
+            font-size:20px;
+            margin-left:20px;
+        } 
+        .clubs{
+            display:flex;
+            height:3rem;
+            margin-left:10px;
+            align-items: center;
+        }
+        .clubinfo {
+            color:white;
+             display: flex; /* Use flexbox for horizontal layout */
+            /* Add space between the items */
+        }
+        .eee-box{
+            display:flex;
+            justify-content: space-between;
+            margin-left:10px;
+            padding-right:80px; 
+            border:1px solid white;
+            border-radius:5px
+        }
+        .alumni-box{
+            display:flex;
+            margin-top:15px;
+            margin-left:10px;
+            padding-right:80px; 
+            border:1px solid white;
+            border-radius:5px
+        }
+        .resource-box{
+            display:flex;
+            margin-top:15px;
+            margin-left:10px;
+            padding-right:80px; 
+            border:1px solid white;
+            border-radius:5px
+        }
+        .club1  {
+            margin-left:10px;
+        }
+        .club-name{
+            margin-left:150px;
+        }
+        .member-count1{
+            margin-left:100px;
+        } 
+        .member-count2{
+            margin-left:65px;
+        } 
+        .member-count3{
+            margin-left:65px;
+        } 
+        .side-clubs{
+            font-size:20px;
+            margin-left:20px;
+        }
+        .add-1{
+            margin-left:10px;
+        }
+        .add-2{
+            margin-left:10px;
+        }
+       .left{
+            margin-top:20px;
+            border-radius:15px;
+            width:500px; 
+            background-color:#1d253d;
+        } 
+        .cse{
+            display:flex;
+            justify-items: space-between;
+            width:100% 
+        }
+        .icon{
+            margin-left:10px;
+        }
+        .dep-name{
+            margin-left:150px;
+        }
+        .icon2{
+            margin-left:150px;
+        }
+        .eee-icon{
+            margin-left:10px;
+        }
+        .eee{
+            margin-left:110px;
+        }
+        .dropdown{
+            margin-left:100px;
+        }
+        .alumni-icon{
+            margin-left:10px;
+        }
+        .alumni{
+            margin-left:50px;
+        }
+        .resource-icon{
+            margin-left:10px;
+        }
+        .resource{
+            margin-left:50px;
+        }
+
+        .middle{
+            
+            padding-right:300px;
+           
+            background-color:rebeccapurple
+        } 
+        .right{
+            padding-right:300px;
+            background-color:yellowgreen
+        } 
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container-fluid">
+        <div class="left">
+              <div class="forum">
+                <a href="#" class="side-forum" >
+                    <span class="material-icons-sharp">
+                        forum
+                    </span>
+                    <p>Forum</p></a>
+                <div class="dropdown-divider"></div>
+              </div>
+              
+              <div class="clubs">
+                <span class="material-icons-sharp">
+                    groups 
+                </span>
+                <a href="#" class="side-clubs">  Clubs</a>
+              </div>
+              <div class="dep">
+                <div class="cse">
+                    <div class="icon">
+                        <span class="material-symbols-outlined">
+                            drag_indicator
+                            </span>
+                    </div>
+                    <div class="dep-name">
+                      <p>CSE</p>
+                    </div>
+                    <div class="icon2">
+                       <p>Icon2</p>
+                     </div>
+                </div> 
+                <div class="clubinfo">
+                    <div class="club1">
+                        <span class="material-symbols-outlined">
+                            drag_indicator
+                            </span>
+                    </div>
+                    <div class="club-name">
+                        <p>Software</p>
+                    </div>
+                    <div class="member-count1">
+                        <p>20+Members</p>
+                    </div>
+                </div>
+                <div class="clubinfo">
+                    <div class="club1">
+                        <span class="material-symbols-outlined">
+                            drag_indicator
+                            </span>
+                    </div>
+                    <div class="club-name">
+                        <p>CyberSecurity</p>
+                    </div>
+                    <div class="member-count2">
+                        <p>20+Members</p>
+                    </div>
+                </div>
+                <div class="clubinfo">
+                    <div class="club1">
+                        <span class="material-symbols-outlined">
+                            drag_indicator
+                            </span>
+                    </div>
+                    <div class="club-name">
+                        <p>Programming <br>Contest  </p>
+                    </div>
+                    <div class="member-count3">
+                        <p>20+Members</p>
+                    </div>
+                </div>
+              </div>
+               <!-- End of dep div -->
+            <div class="eee-box">
+                    <div class="eee-icon">
+                        <p>Icon</p>
+                    </div>
+                    <div class="eee">
+                        <p>EEE</p>
+                    </div>
+                    <div class="dropdown">
+                        <p>Icon2</p>
+                    </div>
+            </div>
+
+            <div class="alumni-box">
+                <div class="alumni-icon">
+                    <p>Icon</p>
+                </div>
+                <div class="alumni">
+                    <p>Alumni</p>
+                </div>
+            </div>
+            <div class="resource-box">
+                <div class="resource-icon">
+                    <p>Icon</p>
+                </div>
+                <div class="resource">
+                    <p>Alumni</p>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="middle">
+              Middle
+        </div>
+        <div class="right">
+              Right
+        </div>
+    </div>
+  
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>
