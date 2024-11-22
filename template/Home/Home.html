@@ -4,118 +4,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Improved Design</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
     <style>
-        body    {
-             background: linear-gradient(45deg, #080D26, #1F2233);
-             font-family: Arial, Helvetica, sans-serif;
-            }
-        h1,h2,h3,h4,h5{
-            color: aliceblue;
-            }
-        p, a, li {
-            color: aliceblue;
-            text-decoration: none;
-        }
-
-        .divider {
-             border-top: 1px solid #ccc; /* Creates the line */
-             margin: 20px auto; /* Adds space above and below the line */
-            width: 86%; /* Sets the width of the line */
-                }
-
-        .option{
-            margin-top: 2.3vh;
-            padding-top: 2px;
-        }
-
-        .navbar{
-            background: linear-gradient(to right,#21253D, #343847);
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(45deg, #080D26, #1F2233);
+            font-family: Arial, Helvetica, sans-serif;
+            color: aliceblue;
+        }
+
+        a {
+            text-decoration: none;
+            color: aliceblue;
+        }
+
+        .navbar {
+            background: linear-gradient(to right, #21253D, #343847);
             display: flex;
             align-items: center;
-            gap: 20vh;
-            width: 100%;
+            justify-content: space-between;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        .navbar h2{
-            margin-left: 10px;
+        .navbar h2 {
+            font-size: 1.5rem;
+            color: #fff;
         }
 
-        .container{
+        .navbar .section {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar .section h3 {
+            font-size: 1rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .navbar .section h3:hover {
+            color: #00acee;
+        }
+
+        .navbar .profile h3 {
+            font-size: 1rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .navbar .profile h3:hover {
+            color: #00acee;
+        }
+
+        .container {
             display: grid;
-            display: flex;
+            grid-template-columns: 1fr 3fr;
+            gap: 20px;
+            padding: 20px;
+            height: calc(100vh - 70px);
         }
 
-        .section{
+        .left-sidebar {
+            background-color: #101932;
+            border-radius: 15px;
+            padding: 15px;
+            color: whitesmoke;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .option h3 {
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .option h3:hover {
+            color: #00acee;
+        }
+
+        .club-section {
+            background: #18243D;
+            border-radius: 7px;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .posts-section {
+            border-radius: 15px;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .post-body {
+            background-color: #3d5b9c;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            max-width: 800px;
+            min-height:350px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 20px auto;
+            padding:8px;
+            color:#ffffff;
+            overflow: hidden;
+        }
+
+        .post-body:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .post-header {
             display: flex;
             align-items: center;
-            gap: 10vh;
-            margin-left: 10vh;
-            background: red;
+            margin-bottom: 15px;
         }
 
-    aside .left-sidebar{
-            width: 30vh;
-            background-color: #101932;
-         border-radius: 15px;
-        color: whitesmoke;
-         padding-left: 12px;
-         height: 88vh;
-     transition: ease-in 0.3s;
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
         }
 
-    .club-names{
-        margin-left: 0px;
-        margin-right: 25px;
-        border-radius: 10px;
+
+       
+
+        .verified-badge {
+            color: #00acee;
+            margin-left: 5px;
         }
 
-    .club-section {
-        background: #18243D;
-        border-radius: 7px;
-        padding-left: 20px;
-        padding-top: 2px;
-        padding-bottom: 2px;
-}
+        .post-date {
+            margin-left: auto;
+            font-size: 0.8rem;
+        
+        }
 
-    .main-body{
-        background-color: #1F263A;
-        margin-left: 3vh;
-        color: white;
-        width: 60%;
-        border-radius: 15px;
-    margin-top: 2.3vh;
-}
+        .post-content {
+            font-size: 1rem;
+            
+        }
+        .post-content p{
+            margin-bottom:8px;
+        }
 
-.main-title{
-    padding-left: 24rem;
-}
+        .post-images {
+            max-width: 100%;
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            margin:auto;
+        }
 
-.secondary-title{
-    display: flex;
-    margin-left: 4rem;
-}
+        .main-image{
+            max-width: 100%;
+            width:100%;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+            object-fit: cover;
+        }
 
+        /* .small-images img {
+            width: 45%;
+            border-radius: 10px;
+            object-fit: cover;
+        } */
 
-.res-date{
-    margin-left: 17.5rem;
-}
-.res-type{
-    margin-left: 7rem;
-}
+        /* @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
 
-.post-resource{
-    display: flex; /* Use flexbox for alignment */
-    justify-content: flex-start; /* Align items to the left */
-    margin-bottom: 15px;
-}
-
-
+            .posts-section {
+                width: 100%;
+            }
+        } */
     </style>
-
 </head>
 
 <body>
@@ -124,96 +198,62 @@
     <div class="navbar">
         <h2>UAP</h2>
         <div class="section">
-            <a href="#" class="section">
-                <h3>Home</h3>
-            </a>
-            <a href="#" class="section">
-                <h3>Forum</h3>
-            </a>
-            <a href="#" class="section">
-                <h3>Event</h3>
-            </a>
-        </div>
-        <div class="searchbar">
-            <h4>Search</h4>
-        </div>
-        <div class="create-post">
-            <a href="#">
-                <h3>Create</h3>
-            </a>
+            <h3>Home</h3>
+            <h3>Forum</h3>
+            <h3>Event</h3>
         </div>
         <div class="profile">
-            <a href="#">
-                <h3>Profile</h3>
-            </a>
+            <h3>Profile</h3>
         </div>
-
     </div>
 
     <div class="container">
         <!-- Left Sidebar -->
-        <aside>
-            <div class="left-sidebar">
-                <div class="option">
-                    <a href="#">
-                        <h3>Forum</h3>
-                    </a>
-                    <a href="">
-                        <h3>Clubs</h3>
-                    </a>
-                    <div class="club-dropdown">
-                        <div class="club-names">
-                            <div class="club-section">
-                                <div>
-                                    <h3>CSE</h3>
-                                    <a href="#">
-                                        <h4>Software and Hardware Club</h4>
-                                    </a>
-                                    <a href="#">
-                                        <h4>Competitive Programming</h4>
-                                    </a>
-                                    <a href="#">
-                                        <h4>Robotics</h4>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="club-section">
-                                <h3>EEE</h3>
-                                <a href="#">
-                                    <h4>MSI Lab</h4>
-                                </a>
-                                <a href="#">
-                                    <h4>Mathematics</h4>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="#">
-                        <h3>Alumni</h3>
-                    </a>
-                    <a href="#">
-                        <h3>Resources</h3>
-                    </a>
+        <aside class="left-sidebar">
+            <div class="option">
+                <h3>Forum</h3>
+                <h3>Clubs</h3>
+                <div class="club-section">
+                    <h4>CSE</h4>
+                    <p>Software and Hardware Club</p>
+                    <p>Competitive Programming</p>
+                    <p>Robotics</p>
                 </div>
+                <div class="club-section">
+                    <h4>EEE</h4>
+                    <p>MSI Lab</p>
+                    <p>Mathematics</p>
+                </div>
+                <h3>Resources</h3>
             </div>
         </aside>
-        <!-- End of sidebar -->
-        <!-- Home Main -->
-        <div class="main-body">
-           <div >
-                <div class="prof">
 
+        <!-- Posts Section -->
+        <div class="posts-section">
+            {% for p in post %}
+            <div class="post-body">
+                <div class="post-header">
+                    <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
+                    <div class="user-info">
+                        <h4>{{p.user}}<span class="verified-badge">✔️</span></h4>
+                        <p>@JadaJackson</p>
+                    </div>
+                    <div class="post-date">March 24</div>
                 </div>
-                <div class="para">
-
+                <div class="post-content">
+                    <p>{{p.description}}</p>
+                    <div class="post-images">
+                        <img src="{{ p.image.url }}" class="main-image" >
+                        <!-- <div class="small-images">
+                            <img src="cat2.jpg" alt="Cat Image">
+                            <img src="cat3.jpg" alt="Cat Image">
+                        </div> -->
+                    </div>
                 </div>
-           </div> 
-       
+            </div>
+            {% endfor %}
         </div>
-
+    </div>
 
 </body>
-
-
 </html>

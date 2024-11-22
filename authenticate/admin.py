@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import User,Post,Comment,Resources,Club,ClubMember
+from .models import *
 # Register your models here.
-admin.site.register([User,Post,Comment,Resources,Club,ClubMember])
+admin.site.register([Post,Comment,Resources,Club,Forum])

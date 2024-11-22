@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+       *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;}
+      html, body {
+        height: 100%;
+        overflow: hidden; 
+    }
+    .login-bg {
+        background: linear-gradient(to bottom right, #0b0e20, #131d3a);
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+        color: white;
+        font-family: 'Arial', sans-serif;
+    }
+    .image-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+    .right-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    .form-container {
+     background-color: rgba(255, 255, 255, 0.05);
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 100%;
+   }
+
+    .message h1 {
+    margin-bottom: 10px;
+    font-size: 2em;
+    text-align: center;
+        }
+
+    .message p {
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 30px;
+    }
+
+
+    form {
+    display: flex;
+    flex-direction: column;
+    }
+
+    form label {
+    margin-bottom: 5px;
+    font-size: 1em;
+    }
+
+    form input {
+    background-color: rgba(255, 255, 255, 0.05); /* White background with 20% opacity */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: white; /* Ensure text is visible on a darker background */
+    font-size: 1em;
+    }
+
+    form input::placeholder {
+    color: #ccc;
+    }
+
+    .checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    }
+
+    .checkbox-container input {
+    margin-right: 10px;
+    }
+
+    .submit-btn {
+    background-color: #1768be;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    }
+
+    .submit-btn:hover {
+    background-color: #0e4887;
+    }
+
+    form p {
+    text-align: center;
+    font-size: 0.9em;
+    }
+
+    form p a {
+    color: #007bff;
+    text-decoration: none;
+    }
+
+    form p a:hover {
+    text-decoration:underline;
+    }
+</style>
+</head>
+<body>
+   <div class="login-bg">
+        <div class="image">
+           <h1>Image</h1>
+        </div>
+        <!-- Right section with login form -->
+        <div class="right-section">
+            <div class="form-container">
+                <div class="message">
+                    <h1>Welcome!</h1>
+                    <p>Use these awesome forms to login or create a new account in your project for free.</p>
+                </div>
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" placeholder="Your full name" required>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Your email address">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Your password">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <button type="submit" class="submit-btn">Login</button>
+                    <p>Already have an account? <a href="#">Sign In</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+   </div>
+</body>
+</html>
