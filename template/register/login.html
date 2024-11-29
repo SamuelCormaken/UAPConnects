@@ -133,7 +133,7 @@
             <div class="form-container">
                 <div class="message">
                     <h1>Welcome!</h1>
-                    <p>Use these awesome forms to login or create a new account in your project for free.</p>
+                    <p>Use this Form to Log in</p>
                 </div>
                 <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
@@ -148,7 +148,7 @@
                         <label for="remember">Remember me</label>
                     </div>
                     <button type="submit" class="submit-btn">Login</button>
-                    <p>Already have an account? <a href="#">Sign In</a></p>
+                    <p>Already have an account? <a href="{% url 'signup' %}">Sign In</a></p>
                 </form>
             </div>
         </div>

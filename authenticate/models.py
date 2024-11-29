@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 # Create your models here.
 
 class Club(models.Model):
@@ -20,14 +21,9 @@ class Club(models.Model):
 
 class Post(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
-    post_choice=(
-        ('HomePost','HomePost'),
-        ('ForumPost','ForumPost')
-    )
-    post=models.CharField(max_length=300,choices=post_choice,blank=True,null=True)
     description=models.TextField(max_length=250,blank=True,null=True)
     image= models.ImageField(upload_to='post_images/', blank=True, null=True)
-    timestamp=models.DateField()
+    timestamp=models.DateField(default=now)
 
 
 class Comment(models.Model):
@@ -49,12 +45,12 @@ class Resources(models.Model):
     )
     file_type=models.CharField(max_length=300,choices=file_choice,blank=True,null=True)
     resource=models.CharField(max_length=200,blank=True,null=True)
-    dateuploaded= models.DateTimeField(null=True, blank=True)
+    dateuploaded= models.DateTimeField(default=now)
     def __str__(self) -> str:
         return self.file_type
 
 class Forum(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
-    time=models.DateField()
+    time=models.DateField(default=now)
     title=models.CharField(max_length=250,blank=True,null=True)
     query=models.TextField(max_length=250,blank=True,null=True)

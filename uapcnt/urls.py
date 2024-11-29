@@ -29,6 +29,15 @@ urlpatterns = [
         path('resources/',acc_views.resources,name="resources"),
         path('forum/',acc_views.forum,name="forum"),
         path('createpost/', acc_views.createpost, name="createpost"),
+        path('upload_post/', acc_views.upload_post, name="upload_post"),
+        path('update_post/<str:id>', acc_views.update_post, name="update_post"),
+        path('delete_post/<str:id>', acc_views.delete_post, name="delete_post"),
+        path('upload_query/', acc_views.upload_query, name="upload_query"),
+        path('update_query/<str:id>', acc_views.update_query, name="update_query"),
+        path('delete_query/<str:id>', acc_views.delete_query, name="delete_query"),
+        path('upload_resource/', acc_views.upload_resource, name="upload_resource"),
+        path('update_resource/<str:id>',acc_views.update_resource,name="update_resource"),
+        path('delete_resource/<str:id>',acc_views.delete_resource,name="delete_resource"),
         path('clubdetails/', acc_views.clubdetails, name="clubdetails"),
 ]
 if settings.DEBUG:

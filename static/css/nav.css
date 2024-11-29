@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.navbar {
+    background: linear-gradient(to right, #21253D, #343847);
+    display: flex;
+    align-items: center;
+    gap: 0rem;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.navbar:hover {
+    box-shadow: none;
+}
+
+.navbar .section {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar .section h3 {
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.navbar .create-post {
+    margin-left: 20px;
+    /* Space between the "Create Post" button and the section */
+}
+
+.navbar .create-post button {
+    background-color: #00acee;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .create-post button:hover {
+    background-color: #008bb2;
+}
+
+.navbar .profile h3 {
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.navbar .profile h3:hover {
+    color: #00acee;
+}
+
+.section-link {
+    position: relative;
+    text-decoration: none;
+    color: aliceblue;
+}
+
+.section-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0%;
+    height: 3px;
+    background-color: aliceblue;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+    bottom: -5px;
+    transform: translateX(-50%)
+}
+
+.section-link:hover::after {
+    width: 101%;
+}
