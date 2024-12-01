@@ -322,9 +322,13 @@
                         bookmark
                     </span>
                 </div>
-                <div><a href="{% url 'update_query' f.id %}" class="post-btn">Edit Post</a>
+                
+                <div>{% if request.user == f.user %}
+                    <a href="{% url 'update_query' f.id %}" class="post-btn">Edit Post</a>
                     <a href="{% url 'delete_query' f.id %}" class="post-btn">Delete Post</a>
+                    {% endif %}
                 </div>
+                
             </div>
             </div>
             <div class="divider"></div>

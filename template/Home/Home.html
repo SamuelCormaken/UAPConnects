@@ -60,36 +60,59 @@
             </div>
         </aside>
         <!-- Posts Section -->
-        <div class="posts-section">
-            {% for p in post %}
-            <div class="post-body">
-                <div class="post-header">
-                    <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
-                    <div class="user-info">
-                        <h4>{{p.user.username}}<span class="verified-badge">✔️</span></h4>
-                        <p>@JadaJackson</p>
-                    </div>
-                    
-                    <div class="button">
-                        <div class="post-date">{{p.timestamp}}</div>
+    <div class="posts-section">
+        {% for p in post %}
+        <div class="post-body">
+            <div class="post-header">
+                <img src="alpaca.jpg" alt="Profile Picture" class="profile-pic">
+                <div class="user-info">
+                    <h4>{{ p.user }}<span class="verified-badge">✔️</span></h4>
+                    <p>@JadaJackson</p>
+                </div>
+
+                <div class="button">
+                    <div class="post-date">{{ p.timestamp }}</div>
+                    {% if request.user == p.user %}
                         <a href="{% url 'update_post' p.id %}" class="post-btn">Edit Post</a>
                         <a href="{% url 'delete_post' p.id %}" class="post-btn">Delete Post</a>
-                    </div>
-                    
-                </div>
-                <div class="post-content">
-                    <p>{{p.description}}</p>
-                    <div class="post-images">
-                        <img src="{{ p.image.url }}" class="main-image" >
-                        <!-- <div class="small-images">
-                            <img src="cat2.jpg" alt="Cat Image">
-                            <img src="cat3.jpg" alt="Cat Image">
-                        </div> -->
-                    </div>
+                    {% endif %}
                 </div>
             </div>
-            {% endfor %}
+
+            <div class="post-content">
+                <p>{{ p.description }}</p>
+                <div class="post-images">
+                    {% if p.image %}
+                        <img src="{{ p.image.url }}" class="main-image">
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+                <h5>Comments:</h5>
+                <ul>
+                    {% for comment in p.comment_set.all %}
+                        <li>
+                            <strong>{{ comment.user.username }}</strong>: {{ comment.contents }}
+                            <br><small>{{ comment.timestamp }}</small>
+                        </li>
+                    {% empty %}
+                        <li>No comments yet. Be the first to comment!</li>
+                    {% endfor %}
+                </ul>
+                
+                <!-- Add a Comment -->
+                <form method="POST" action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_id" value="{{ p.id }}">
+                    <textarea name="contents" placeholder="Write a comment..." required></textarea>
+                    <button type="submit" class="comment-btn">Comment</button>
+                </form>
+            </div>
         </div>
+        {% endfor %}
     </div>
+</div>
 
 {% endblock %}

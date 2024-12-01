@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Page</title>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #0E1320;
+  color: #FFFFFF;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #1A1F2E;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav a, .create-post {
+  color: #FFFFFF;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+.create-post {
+  background-color: #0078FF;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.theme-toggle button {
+  margin: 0 5px;
+  border: none;
+  background: none;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.theme-toggle .active {
+  font-weight: bold;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  background-color: #1A1F2E;
+  width: 250px;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  margin-bottom: 15px;
+}
+
+.sidebar .logout {
+  background-color: #FF3B3B;
+  color: #FFFFFF;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profile-details {
+  flex: 1;
+  padding: 40px;
+  background-color: #151A28;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.profile-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.profile-info h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.detail-item h3 {
+  font-size: 14px;
+  color: #A0A4AF;
+}
+
+.detail-item p {
+  font-size: 16px;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">UAP</div>
+      <nav class="nav">
+        <a href="#">Home</a>
+        <a href="#">Forum</a>
+        <a href="#">Events</a>
+        <button class="create-post">+ Create Post</button>
+        <div class="theme-toggle">
+          <button class="light">Light</button>
+          <button class="dark active">Dark</button>
+        </div>
+        <div class="profile">
+          <img src="user-avatar.jpg" alt="User" class="profile-img">
+          <span class="profile-name">Jackson D.</span>
+        </div>
+      </nav>
+    </header>
+    
+    <main class="main">
+      <aside class="sidebar">
+        <ul>
+          <li>Profile settings</li>
+          <li>General setting</li>
+          <li>Notification</li>
+          <li>Notification Settings</li>
+          <li>Saved</li>
+          <li>Help</li>
+          <li>Terms & Conditions</li>
+          <li>Privacy Policy</li>
+          <li><button class="logout">Log out</button></li>
+        </ul>
+      </aside>
+      
+      <section class="profile-details">
+        <div class="profile-card">
+          <img src="profile-pic.jpg" alt="Profile" class="profile-photo">
+          <div class="profile-info">
+            <h2>Alexa Rawles</h2>
+            <p>alexarawles@gmail.com</p>
+          </div>
+        </div>
+        <div class="details-grid">
+          <div class="detail-item">
+            <h3>Full Name</h3>
+            <p>Your First Name</p>
+          </div>
+          <div class="detail-item">
+            <h3>Language</h3>
+            <p>English</p>
+          </div>
+          <div class="detail-item">
+            <h3>Email Address</h3>
+            <p>johnhanson859@gmail.com</p>
+          </div>
+          <div class="detail-item">
+            <h3>Password</h3>
+            <p>**********</p>
+          </div>
+          <div class="detail-item">
+            <h3>Phone Number</h3>
+            <p>+01618375047</p>
+          </div>
+          <div class="detail-item">
+            <h3>Department</h3>
+            <p>CSE</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

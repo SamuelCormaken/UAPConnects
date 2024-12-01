@@ -202,7 +202,6 @@ aside .left-sidebar {
 }
 
 .side-button {
-    background-color: red;
     display: flex;
     justify-content: flex-end;
     flex-grow: 1
