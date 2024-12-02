@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.contrib.auth import logout
 from .models import *
 from .forms import *
@@ -10,6 +12,28 @@ from .forms import *
 # Create your views here.
 @login_required
 def home(request):
+    posts = Post.objects.all().order_by('-timestamp')  # Fetch all posts
+
+    if request.method == "POST":
+        post_id = request.POST.get("post_id")
+        contents = request.POST.get("contents")
+        post = get_object_or_404(Post, id=post_id)
+
+        # Create a new comment
+        Comment.objects.create(
+            post=post,
+            user=request.user,
+            contents=contents,
+        )
+        return redirect("home")  # Redirect to the home page after adding a comment
+
+    context = {'post': posts}
+    return render(request, template_name="Home/home.html", context=context)
+
+
+@login_required
+def profile(request):
+    return render(request,template_name="Home/profile.html")
     posts = Post.objects.all().order_by('-timestamp')  # Fetch all posts
 
     if request.method == "POST":
@@ -43,6 +67,7 @@ def createpost(request):
 
 
 @login_required
+@login_required
 def forum(request):
     forum_posts = Forum.objects.all()
 
@@ -63,6 +88,7 @@ def forum(request):
     return render(request, template_name="Home/forum.html", context=context)
 
 
+@login_required
 @login_required
 def clubdetails(request):
     club=Club.objects.all()
@@ -111,6 +137,12 @@ def logout_view(request):
     messages.success(request, "You have been logged out successfully.")
     return redirect('login')
 
+#logout
+def logout_view(request):
+    logout(request)
+    messages.success(request, "You have been logged out successfully.")
+    return redirect('login')
+
 
 #upload post(Create) 
 @login_required
@@ -127,8 +159,12 @@ def upload_post(request):
     return render(request,template_name="allforms\postform.html",context=context)
 
 @login_required
+@login_required
 def update_post(request,id):
     post=Post.objects.get(pk=id)
+    if request.user != post.user:
+        messages.error(request, "You are not authorized to edit this post.")
+        return redirect('home')
     if request.user != post.user:
         messages.error(request, "You are not authorized to edit this post.")
         return redirect('home')
@@ -144,8 +180,13 @@ def update_post(request,id):
     return render(request,template_name="allforms\postform.html",context=context)
 
 @login_required
+@login_required
 def delete_post(request,id):
     post=Post.objects.get(pk=id)
+    if request.user != post.user:
+        messages.error(request, "You are not authorized to delete this post.")
+        return redirect('home')
+
     if request.user != post.user:
         messages.error(request, "You are not authorized to delete this post.")
         return redirect('home')
@@ -169,8 +210,12 @@ def upload_query(request):
     return render(request,template_name="allforms\postform.html",context=context)
 
 @login_required
+@login_required
 def update_query(request,id):
     forum=Forum.objects.get(pk=id)
+    if request.user != forum.user:
+        messages.error(request, "You are not authorized to edit this post.")
+        return redirect('home')
     if request.user != forum.user:
         messages.error(request, "You are not authorized to edit this post.")
         return redirect('home')
@@ -186,8 +231,12 @@ def update_query(request,id):
     return render(request,template_name="allforms\postform.html",context=context)
 
 @login_required
+@login_required
 def delete_query(request,id):
     forum=Forum.objects.get(pk=id)
+    if request.user != forum.user:
+        messages.error(request, "You are not authorized to delete this post.")
+        return redirect('home')
     if request.user != forum.user:
         messages.error(request, "You are not authorized to delete this post.")
         return redirect('home')
@@ -197,6 +246,7 @@ def delete_query(request,id):
     return render(request,template_name="allforms/delete_query.html")
 
 @login_required
+@login_required
 def resources(request):
     resource=Resources.objects.all()
     context={
@@ -204,6 +254,7 @@ def resources(request):
     }
     return render(request,template_name="Home/resources.html",context=context)
 
+@login_required
 @login_required
 def upload_resource(request):
     form = Resource_Form()
@@ -218,6 +269,7 @@ def upload_resource(request):
     return render(request, template_name='allforms/resourceform.html',context=context)
 
 @login_required
+@login_required
 def update_resource(request,id):
     resource = Resources.objects.get(pk=id)
     form = Resource_Form(instance=resource)
@@ -231,6 +283,7 @@ def update_resource(request,id):
     context = {'form':form}
     return render(request,template_name='allforms/resourceform.html', context=context)
 
+@login_required
 @login_required
 def delete_resource(request,id):
     resource = Resources.objects.get(pk=id)

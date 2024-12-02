@@ -4,6 +4,8 @@
     box-sizing: border-box;
     font-family: 'Gilroy', sans-serif;
     text-decoration: none;
+    font-family: 'Gilroy', sans-serif;
+    text-decoration: none;
 }
 .navbar {
     background: linear-gradient(to right, #21253D, #343847);
@@ -16,9 +18,12 @@
 }
 .navbar h2,h3{
     color: aliceblue;
+.navbar h2,h3{
+    color: aliceblue;
 }
 
 .navbar .section {
+    margin-left: 32rem;
     margin-left: 32rem;
     display: flex;
     gap: 20px;
@@ -30,6 +35,9 @@
     transition: color 0.3s;
 }
 
+.center{
+    display: flex;
+    align-items: center;
 .center{
     display: flex;
     align-items: center;
