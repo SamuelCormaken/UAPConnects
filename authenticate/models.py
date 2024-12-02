@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.timezone import now
 # Create your models here.
 
+
 class Club(models.Model):
     clubId=models.IntegerField()
     clubName=models.CharField(max_length=200,blank=True,null=True)
@@ -54,3 +55,12 @@ class Forum(models.Model):
     time=models.DateField(default=now)
     title=models.CharField(max_length=250,blank=True,null=True)
     query=models.TextField(max_length=250,blank=True,null=True)
+
+class ForumComment(models.Model):
+    forum = models.ForeignKey(Forum, on_delete=models.CASCADE, related_name='comment_set')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    contents = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Comment by {self.user.username} on {self.forum.title}"

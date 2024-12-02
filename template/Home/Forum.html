@@ -253,6 +253,64 @@
                 width: 100%;
             }
         } */
+
+        .comments-section {
+            background-color: #2c3e50; /* Dark background */
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            color: white; /* Light text */
+        }
+
+        .comments-section h5 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .comments-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .comments-section li {
+            margin-bottom: 15px;
+            color: white;
+            border-bottom: 1px solid #34495e; /* Dark border between comments */
+            padding-bottom: 10px;
+        }
+
+        .comments-section li strong {
+            color: #3498db; /* Light blue for usernames */
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #34495e; /* Dark border */
+            border-radius: 4px;
+            background-color: #34495e; /* Dark background for textarea */
+            color: white; /* Light text in textarea */
+            margin-top: 10px;
+            resize: vertical;
+        }
+
+        .comment-btn {
+            display: block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .comment-btn:hover {
+            background-color: #2980b9;
+        }
+
+        
     </style>
 </head>
 
@@ -322,9 +380,35 @@
                         bookmark
                     </span>
                 </div>
-                <div><a href="{% url 'update_query' f.id %}" class="post-btn">Edit Post</a>
+                
+                <div>{% if request.user == f.user %}
+                    <a href="{% url 'update_query' f.id %}" class="post-btn">Edit Post</a>
                     <a href="{% url 'delete_query' f.id %}" class="post-btn">Delete Post</a>
+                    {% endif %}
                 </div>
+                
+            </div>
+             <!-- Comments Section -->
+             <div class="comments-section">
+                <h5>Comments:</h5>
+                <ul>
+                    {% for comment in f.comment_set.all %}
+                        <li>
+                            <strong>{{ comment.user.username }}</strong>: {{ comment.contents }}
+                            <br><small>{{ comment.timestamp }}</small>
+                        </li>
+                    {% empty %}
+                        <li>No comments yet. Be the first to comment!</li>
+                    {% endfor %}
+                </ul>
+                
+                <!-- Add a Comment -->
+                <form method="POST" action="{% url 'forum' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_id" value="{{ f.id }}">
+                    <textarea name="contents" placeholder="Write a comment..." required></textarea>
+                    <button type="submit" class="comment-btn">Comment</button>
+                </form>
             </div>
             </div>
             <div class="divider"></div>
