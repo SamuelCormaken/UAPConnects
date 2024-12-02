@@ -28,6 +28,7 @@ urlpatterns = [
         path('logout/', acc_views.logout_view, name="logout"),
         path('home/',acc_views.home,name="home"),
         path('profile/',acc_views.profile,name="profile"),
+        path('edit_profile/', acc_views.edit_profile, name='edit_profile'),
         path('resources/',acc_views.resources,name="resources"),
         path('forum/',acc_views.forum,name="forum"),
         path('createpost/', acc_views.createpost, name="createpost"),

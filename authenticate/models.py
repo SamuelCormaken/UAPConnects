@@ -3,7 +3,14 @@ from django.contrib.auth.models import User
 from django.utils.timezone import now
 # Create your models here.
 
+class User_Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    image = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
+    def __str__(self):
+        return f"{self.user.username}'s Profile"
+
+    
 class Club(models.Model):
     clubId=models.IntegerField()
     clubName=models.CharField(max_length=200,blank=True,null=True)

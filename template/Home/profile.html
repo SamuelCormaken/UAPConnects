@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,213 +8,112 @@
   <title>Profile Page</title>
   <style>
     * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
-}
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
 
-body {
-  background-color: #0E1320;
-  color: #FFFFFF;
-}
+    body {
+      background-color: #0E1320;
+      color: #FFFFFF;
+    }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+    .container {
+     
+      display: flex;
+      align-items: flex-start;
+      padding: 20px;
+      gap: 30px;
+    }
+    .pro{
+      width: 100px;
+      height: 100px;
+    }
+    .profile-image {
+      width:100%;
+      height: 100%;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto;
+      object-fit: cover;
+    }
+    
+    .profile-details {
+      flex: 1;
+      padding: 20px;
+      background-color: #151A28;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .head-pro{
+      display: flex;
+      
+    }
+    .profile-details h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background-color: #1A1F2E;
-}
+    .profile-details p {
+      font-size: 16px;
+      color: #B0BEC5;
+    }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-}
+    .details-grid {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
 
-.nav a, .create-post {
-  color: #FFFFFF;
-  margin-right: 20px;
-  text-decoration: none;
-}
+    .detail-item {
+      margin-bottom: 15px;
+    }
 
-.create-post {
-  background-color: #0078FF;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+    .detail-item h3 {
+      font-size: 18px;
+      color: #B0BEC5;
+    }
 
-.theme-toggle button {
-  margin: 0 5px;
-  border: none;
-  background: none;
-  color: #FFFFFF;
-  cursor: pointer;
-}
-
-.theme-toggle .active {
-  font-weight: bold;
-}
-
-.profile {
-  display: flex;
-  align-items: center;
-}
-
-.profile-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.main {
-  display: flex;
-  flex: 1;
-}
-
-.sidebar {
-  background-color: #1A1F2E;
-  width: 250px;
-  padding: 20px;
-}
-
-.sidebar ul {
-  list-style: none;
-}
-
-.sidebar li {
-  margin-bottom: 15px;
-}
-
-.sidebar .logout {
-  background-color: #FF3B3B;
-  color: #FFFFFF;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.profile-details {
-  flex: 1;
-  padding: 40px;
-  background-color: #151A28;
-}
-
-.profile-card {
-  display: flex;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.profile-photo {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-right: 20px;
-}
-
-.profile-info h2 {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.details-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.detail-item h3 {
-  font-size: 14px;
-  color: #A0A4AF;
-}
-
-.detail-item p {
-  font-size: 16px;
-}
+    .detail-item p {
+      font-size: 16px;
+      color: #FFFFFF;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <header class="header">
-      <div class="logo">UAP</div>
-      <nav class="nav">
-        <a href="#">Home</a>
-        <a href="#">Forum</a>
-        <a href="#">Events</a>
-        <button class="create-post">+ Create Post</button>
-        <div class="theme-toggle">
-          <button class="light">Light</button>
-          <button class="dark active">Dark</button>
-        </div>
-        <div class="profile">
-          <img src="user-avatar.jpg" alt="User" class="profile-img">
-          <span class="profile-name">Jackson D.</span>
-        </div>
-      </nav>
-    </header>
+    <!-- Profile Image -->
     
-    <main class="main">
-      <aside class="sidebar">
-        <ul>
-          <li>Profile settings</li>
-          <li>General setting</li>
-          <li>Notification</li>
-          <li>Notification Settings</li>
-          <li>Saved</li>
-          <li>Help</li>
-          <li>Terms & Conditions</li>
-          <li>Privacy Policy</li>
-          <li><button class="logout">Log out</button></li>
-        </ul>
-      </aside>
-      
-      <section class="profile-details">
-        <div class="profile-card">
-          <img src="profile-pic.jpg" alt="Profile" class="profile-photo">
-          <div class="profile-info">
-            <h2>Alexa Rawles</h2>
-            <p>alexarawles@gmail.com</p>
+    
+    <!-- Profile Details -->
+    <div class="profile-details">
+      <div class="head-pro">
+          <div>
+            <h1>Welcome, {{ user_profile.user.username }}</h1>
+            <p>{{ user_profile.user.email }}</p>
           </div>
+          <div class="pro">
+            {% if user_profile.image %}
+              <img src="{{ user_profile.image.url }}" alt="Profile Picture" class="profile-image">
+            {% else %}
+              <div class="profile-image">👤</div>
+            {% endif %}
+          </div>
+    </div>
+      <div class="details-grid">
+        <div class="detail-item">
+          <h3>User Name:</h3>
+          <p>{{ user_profile.user.username }}</p>
         </div>
-        <div class="details-grid">
-          <div class="detail-item">
-            <h3>Full Name</h3>
-            <p>Your First Name</p>
-          </div>
-          <div class="detail-item">
-            <h3>Language</h3>
-            <p>English</p>
-          </div>
-          <div class="detail-item">
-            <h3>Email Address</h3>
-            <p>johnhanson859@gmail.com</p>
-          </div>
-          <div class="detail-item">
-            <h3>Password</h3>
-            <p>**********</p>
-          </div>
-          <div class="detail-item">
-            <h3>Phone Number</h3>
-            <p>+01618375047</p>
-          </div>
-          <div class="detail-item">
-            <h3>Department</h3>
-            <p>CSE</p>
-          </div>
+        <div class="detail-item">
+          <h3>Email Address:</h3>
+          <p>{{ user_profile.user.email }}</p>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   </div>
 </body>
+{% endblock %}
 </html>
