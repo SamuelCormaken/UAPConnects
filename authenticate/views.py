@@ -1,5 +1,4 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login
@@ -8,43 +7,70 @@ from django.contrib.auth import logout
 from django.contrib.auth import logout
 from .models import *
 from .forms import *
-
 # Create your views here.
 @login_required
 def home(request):
-    posts = Post.objects.all().order_by('-timestamp')  # Fetch all posts
+    posts = Post.objects.all().order_by('-timestamp') 
 
     if request.method == "POST":
-        post_id = request.POST.get("post_id")
-        contents = request.POST.get("contents")
-        post = get_object_or_404(Post, id=post_id)
+        if "like_post" in request.POST:
+            post_id = request.POST.get("post_id")
+            post = get_object_or_404(Post, id=post_id)
+            
+            if request.user in post.likes.all():
+                post.likes.remove(request.user)  
+                liked = False
+            else:
+                post.likes.add(request.user) 
+                liked = True
+            
+            return redirect("home")  
+        
+        if "contents" in request.POST:  
+            post_id = request.POST.get("post_id")
+            contents = request.POST.get("contents")
+            post = get_object_or_404(Post, id=post_id)
 
-        # Create a new comment
-        Comment.objects.create(
-            post=post,
-            user=request.user,
-            contents=contents,
-        )
-        return redirect("home")  # Redirect to the home page after adding a comment
+            # Create comment
+            Comment.objects.create(
+                post=post,
+                user=request.user,
+                contents=contents,
+            )
+            return redirect("home")  
 
     context = {'post': posts}
     return render(request, template_name="Home/home.html", context=context)
 
 
-
-
 @login_required
-def profile(request):
-    # Get the logged-in user's profile
-    user_profile = get_object_or_404(User_Profile, user=request.user)
+def forum(request):
+    forums = Forum.objects.all().order_by('-time')  
+
+    if request.method == "POST":
+        post_id = request.POST.get("post_id")
+        forum_post = get_object_or_404(Forum, id=post_id)
+
+        if "upvote" in request.POST:
+            if request.user in forum_post.upvotes.all():
+                forum_post.upvotes.remove(request.user)  
+            else:
+                forum_post.upvotes.add(request.user) 
+                forum_post.downvotes.remove(request.user) 
+
+        elif "downvote" in request.POST:
+            if request.user in forum_post.downvotes.all():
+                forum_post.downvotes.remove(request.user) 
+            else:
+                forum_post.downvotes.add(request.user)  
+                forum_post.upvotes.remove(request.user)  
+
+        return redirect("forum")
+
+    context = {'forum': forums}
+    return render(request, "Home/forum.html", context)
 
 
-
-    # Pass data to the template
-    context = {
-        'user_profile': user_profile,
-    }
-    return render(request, template_name='Home/profile.html', context=context)
 
 @login_required
 def createpost(request):
@@ -56,25 +82,6 @@ def createpost(request):
 
 
 
-@login_required
-def forum(request):
-    forum_posts = Forum.objects.all()
-
-    if request.method == "POST":
-        post_id = request.POST.get("post_id")
-        contents = request.POST.get("contents")
-        forum = get_object_or_404(Forum, id=post_id)
-
-        # Create a new forum comment
-        ForumComment.objects.create(
-            forum=forum,
-            user=request.user,
-            contents=contents,
-        )
-        return redirect("forum")  # Redirect to the forum page after adding a comment
-
-    context = {'forum': forum_posts}
-    return render(request, template_name="Home/forum.html", context=context)
 
 
 
@@ -95,7 +102,7 @@ def login(request):
         if user is not None:
             auth_login(request, user)
             messages.success(request, f"Welcome back, {username}!")
-            return redirect('home')  # Redirect to home page
+            return redirect('home')  
         else:
             messages.error(request, "Invalid username or password.")
             return redirect('login')  
@@ -116,7 +123,6 @@ def signup(request):
 
         user = User.objects.create_user(username=username, email=email, password=password)
         user.save()
-        # Create User_Profile instance
         User_Profile.objects.create(user=user)
         messages.success(request, "Account created successfully! You can now log in.")
         return redirect('login')
@@ -124,7 +130,6 @@ def signup(request):
     return render(request, template_name="register/signup.html")
 
 
-#logout
 def logout_view(request):
     logout(request)
     messages.success(request, "You have been logged out successfully.")
@@ -278,6 +283,16 @@ def delete_resource(request,id):
         resource.delete()
         return redirect('resources')
     return render(request,template_name='allforms/deleteresource.html')
+
+
+@login_required
+def profile(request):
+    # Get the logged-in user's profile
+    user_profile = get_object_or_404(User_Profile, user=request.user)
+    context = {
+        'user_profile': user_profile,
+    }
+    return render(request, template_name='Home/profile.html', context=context)
 
 @login_required
 def edit_profile(request):

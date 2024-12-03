@@ -64,14 +64,16 @@
         {% for p in post %}
         <div class="post-body">
             <div class="post-header">
-                <img src="alpaca.jpg" alt="Profile Picture" class="profile-pic">
+                <img src="{{ p.image.url }}" alt="Profile Picture" class="profile-pic">
                 <div class="user-info">
                     <h4>{{ p.user }}<span class="verified-badge">✔️</span></h4>
                     <p>@JadaJackson</p>
                 </div>
 
                 <div class="button">
-                    <div class="post-date">{{ p.timestamp }}</div>
+                    <div class="post-date">
+                        {{ p.timestamp }}
+                    </div>
                     {% if request.user == p.user %}
                         <a href="{% url 'update_post' p.id %}" class="post-btn">Edit Post</a>
                         <a href="{% url 'delete_post' p.id %}" class="post-btn">Delete Post</a>
@@ -87,6 +89,22 @@
                     {% endif %}
                 </div>
             </div>
+
+     <!-- Like Button -->
+    <div class="like-section">
+        <form method="POST" action="{% url 'home' %}">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{ p.id }}">
+            <button type="submit" name="like_post" class="like-btn">
+                {% if user in p.likes.all %}
+                    ❤️ Unlike
+                {% else %}
+                    🤍 Like
+                {% endif %}
+            </button>
+        </form>
+        <span>{{ p.total_likes }} Likes</span>
+    </div>
 
             <!-- Comments Section -->
             <div class="comments-section">

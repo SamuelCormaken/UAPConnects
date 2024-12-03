@@ -6,7 +6,7 @@ from django.utils.timezone import now
 class User_Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     image = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
-
+    
     def __str__(self):
         return f"{self.user.username}'s Profile"
 
@@ -28,10 +28,15 @@ class Club(models.Model):
 
 
 class Post(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
-    description=models.TextField(max_length=250,blank=True,null=True)
-    image= models.ImageField(upload_to='post_images/', blank=True, null=True)
-    timestamp=models.DateField(default=now)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    description = models.TextField(max_length=250, blank=True, null=True)
+    image = models.ImageField(upload_to='post_images/', blank=True, null=True)
+    timestamp = models.DateField(default=now)
+    likes = models.ManyToManyField(User, related_name='liked_posts', blank=True)
+
+    def total_likes(self):
+        return self.likes.count()
+
 
 
 class Comment(models.Model):
@@ -58,10 +63,17 @@ class Resources(models.Model):
         return self.file_type
 
 class Forum(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
-    time=models.DateField(default=now)
-    title=models.CharField(max_length=250,blank=True,null=True)
-    query=models.TextField(max_length=250,blank=True,null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    time = models.DateField(default=now)
+    title = models.CharField(max_length=250, blank=True, null=True)
+    query = models.TextField(max_length=250, blank=True, null=True)
+    upvotes = models.ManyToManyField(User, related_name='forum_upvotes', blank=True)
+    downvotes = models.ManyToManyField(User, related_name='forum_downvotes', blank=True)
+    def total_upvotes(self):
+        return self.upvotes.count()
+    def total_downvotes(self):
+        return self.downvotes.count()
+
 
 class ForumComment(models.Model):
     forum = models.ForeignKey(Forum, on_delete=models.CASCADE, related_name='comment_set')

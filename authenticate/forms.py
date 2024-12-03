@@ -6,12 +6,12 @@ from .models import *
 class PostForm(ModelForm):
    class Meta:
        model = Post
-       exclude=['user']
+       exclude=['user','likes']
 
 class ForumPost_Form(ModelForm):
     class Meta:
         model=Forum
-        exclude=['user']
+        exclude=['user','upvotes','downvotes']
 
 class Resource_Form(ModelForm):
     class Meta:

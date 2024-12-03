@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <html lang="en">
 
 <head>
@@ -30,51 +32,8 @@
             text-decoration: none;
             color: aliceblue;
         }
-
-        .navbar {
-            background: linear-gradient(to right, #21253D, #343847);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .navbar h2 {
-            font-size: 1.5rem;
-            color: #fff;
-        }
-
-        .navbar .section {
-            display: flex;
-            gap: 20px;
-        }
-
-        .navbar .section h3 {
-            font-size: 1rem;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .navbar .section h3:hover {
-            color: #00acee;
-        }
-
-        .navbar .profile h3 {
-            font-size: 1rem;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .navbar .profile h3:hover {
-            color: #00acee;
-
-        }
-
         .container {
-            display: grid;
             display: flex;
-            /* grid-template-columns: 1fr 6fr; */
             gap: 20px;
             padding: 20px;
 
@@ -216,6 +175,17 @@
             transition: ease-in 0.2s;
             cursor: pointer;
         }
+
+        .material-symbols-outlined {
+            font-size: 24px;
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .material-symbols-outlined:hover {
+            color: #00acee;
+            cursor: pointer;
+        }
         .forum-bottom{
             display:flex ;
             justify-content: space-between;
@@ -224,12 +194,12 @@
             display: inline-block;
             text-align: center;
             margin-left: auto;
-            background-color: #44ff00;
+            background-color:#39758f;
             color: white;
             padding: 12px 20px;
             margin-top: 20px;
             border-radius: 5px;
-            text-decoration: none; /* Remove underline */
+            text-decoration: none; 
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -255,11 +225,11 @@
         } */
 
         .comments-section {
-            background-color: #2c3e50; /* Dark background */
+            background-color: #2c3e50; 
             padding: 15px;
             border-radius: 8px;
             margin-top: 20px;
-            color: white; /* Light text */
+            color: white; 
         }
 
         .comments-section h5 {
@@ -288,8 +258,8 @@
             padding: 10px;
             border: 1px solid #34495e; /* Dark border */
             border-radius: 4px;
-            background-color: #34495e; /* Dark background for textarea */
-            color: white; /* Light text in textarea */
+            background-color: #34495e; 
+            color: white; 
             margin-top: 10px;
             resize: vertical;
         }
@@ -298,7 +268,7 @@
             display: block;
             margin-top: 10px;
             padding: 10px 20px;
-            background-color: #3498db;
+            background-color:#458ba9;
             color: white;
             border: none;
             border-radius: 5px;
@@ -315,20 +285,6 @@
 </head>
 
 <body>
-
-    <!-- Navbar -->
-    <div class="navbar">
-        <h2>UAP</h2>
-        <div class="section">
-            <a href="{% url 'home' %}"><h3>Home</h3></a>
-            <h3>Forum</h3>
-            <h3>Event</h3>
-        </div>
-        <div class="profile">
-            <h3>Profile</h3>
-        </div>
-    </div>
-
     <div class="container">
         <!-- Left Sidebar -->
         <aside class="left-sidebar">
@@ -367,19 +323,25 @@
                 </div>
                 <div class="forum-bottom">
                 <div class="symbols">
-                    <span class="material-symbols-outlined">
-                        arrow_upward
-                    </span>
-                    <span class="material-symbols-outlined">
-                        arrow_downward
-                    </span>
-                    <span class="material-symbols-outlined">
-                        chat
-                    </span>
-                    <span class="material-symbols-outlined">
-                        bookmark
-                    </span>
+                        <form method="POST" action="{% url 'forum' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="post_id" value="{{ f.id }}">
+                            <button type="submit" name="upvote" class="material-symbols-outlined" style="background: none; border: none; cursor: pointer;">
+                                arrow_upward
+                            </button>
+                            <span>{{ f.total_upvotes }}</span>
+                        </form>
+                    
+                        <form method="POST" action="{% url 'forum' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="post_id" value="{{ f.id }}">
+                            <button type="submit" name="downvote" class="material-symbols-outlined" style="background: none; border: none; cursor: pointer;">
+                                arrow_downward
+                            </button>
+                            <span>{{ f.total_downvotes }}</span>
+                        </form>
                 </div>
+                    
                 
                 <div>{% if request.user == f.user %}
                     <a href="{% url 'update_query' f.id %}" class="post-btn">Edit Post</a>
@@ -419,5 +381,5 @@
     </div>
 
 </body>
-
+{% endblock %}
 </html>
