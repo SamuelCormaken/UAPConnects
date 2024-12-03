@@ -36,32 +36,29 @@ aside .left-sidebar {
     border-radius: 15px;
     color: whitesmoke;
     padding-left: 12px;
-    height: 81vh;
+    height: 75vh;
     transition: ease-in 0.3s;
 }
 
 .left-sidebar h3 {
-
     font-size: 15px;
 }
+
 
 .option-name {
     display: flex;
     align-items: center;
-    /*outline: 1px solid #2E354C;*/
-    padding: 1%;
+    padding: 0.5rem 0.5rem;
     border-radius: 4px;
     margin-right: 10px;
     gap: 5px;
+    transition: 0.3s ease-in;
 }
 
-/* .left-sidebar .option a h3 {
-    outline: 1px solid #2E354C;
-    padding: 1%;
-    border-radius: 4px;
-    margin-right: 10px;
-} */
-
+.option-name:hover { 
+    margin-left: 0.5rem;
+    size: 30px;
+}
 
 .club-names {
     margin-left: 0px;
@@ -69,13 +66,16 @@ aside .left-sidebar {
     border-radius: 10px;
 }
 
-.club-section {
+.club-section h3{
     background: #18243D;
     border-radius: 7px;
     padding-left: 20px;
     padding-top: 2px;
     padding-bottom: 2px;
+    margin-left:1.5rem;
+    margin-bottom: 20px;
 }
+
 
 .posts-section {
     border-radius: 15px;
@@ -132,23 +132,17 @@ aside .left-sidebar {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
-.post-btn .button-link {
-    width: 100%;
-    text-decoration: none;
-    color: inherit; 
-    display: block; 
-}
 .post-btn:hover{
     background-color:rgb(41, 85, 133);
 }
 
 
 .profile-pic{
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    margin-right: 15px;
+    object-fit: cover;
+    border: 3px solid #2a3140;
 }
 
 
@@ -284,4 +278,7 @@ textarea {
 
 .like-btn:focus {
     outline: none;
+}
+.navbar .section{
+    margin-left:5rem;
 }

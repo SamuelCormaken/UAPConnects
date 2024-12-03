@@ -20,20 +20,22 @@
       <h2>UAP</h2>
       <div class="center">
         <div class="section">
-          <a href="#" class="section-link"><h3>Home</h3></a>
-          <a href="#" class="section-link"><h3>Forum</h3></a>
-          <a href="#" class="section-link"><h3>Event</h3></a>
+          <a href="{% url 'home' %}" class="section-link"><h3>Home</h3></a>
+          <a href="{% url 'forum' %}" class="section-link"><h3>Forum</h3></a>
+          <a href="{% url 'resources' %}" class="section-link"><h3>Resources</h3></a>
+          <a href="{% url 'createpost' %}" class="button">
           <button class="create-post">
-            <span class="material-symbols-rounded">add</span>
-            <h4>Create Post</h4>
+               <span class="material-symbols-rounded">add</span>
+                <h4>Create Post</h4>
           </button>
+        </a>
         </div>
       </div>
       <div class="profile">
         <div class="dropdown">
-          <a href="#" class="profile-name">Sarjil</a>
+          <a href="#" class="profile-name">{{ request.user }}</a>
           <div class="dropdown-content">
-            <a href="#">Profile</a>
+            <a href="{% url 'profile' %}">Profile</a>
             <a href="{% url 'logout' %}">Logout</a>
           </div>
         </div>

@@ -56,11 +56,11 @@
   }
   
   /* Create Post Button */
-  .create-post {
+  .create-post{
     background-color: #61b5db;
     border: none;
     padding: 8px 15px;
-    color: #2b2e41;
+    color:aliceblue;
     border-radius: 15px;
     display: flex;
     align-items: center;
@@ -70,7 +70,12 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     font-size: 0.9rem;
   }
-  
+  .create-post h4{
+    color:aliceblue
+  }
+  .create-post span{
+    color:aliceblue
+  }
   .create-post:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);

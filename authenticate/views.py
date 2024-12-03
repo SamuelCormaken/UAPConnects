@@ -11,7 +11,6 @@ from .forms import *
 @login_required
 def home(request):
     posts = Post.objects.all().order_by('-timestamp') 
-
     if request.method == "POST":
         if "like_post" in request.POST:
             post_id = request.POST.get("post_id")
@@ -49,26 +48,35 @@ def forum(request):
 
     if request.method == "POST":
         post_id = request.POST.get("post_id")
-        forum_post = get_object_or_404(Forum, id=post_id)
-
+        forum = get_object_or_404(Forum, id=post_id)
         if "upvote" in request.POST:
-            if request.user in forum_post.upvotes.all():
-                forum_post.upvotes.remove(request.user)  
+            if request.user in forum.upvotes.all():
+                forum.upvotes.remove(request.user)  
             else:
-                forum_post.upvotes.add(request.user) 
-                forum_post.downvotes.remove(request.user) 
+                forum.upvotes.add(request.user) 
+                forum.downvotes.remove(request.user) 
 
         elif "downvote" in request.POST:
-            if request.user in forum_post.downvotes.all():
-                forum_post.downvotes.remove(request.user) 
+            if request.user in forum.downvotes.all():
+                forum.downvotes.remove(request.user) 
             else:
-                forum_post.downvotes.add(request.user)  
-                forum_post.upvotes.remove(request.user)  
+                forum.downvotes.add(request.user)  
+                forum.upvotes.remove(request.user) 
+
+        elif "contents" in request.POST:  
+            contents = request.POST.get("contents")
+            ForumComment.objects.create(
+                forum=forum,
+                user=request.user,
+                contents=contents,
+            )
+            return redirect("forum")
 
         return redirect("forum")
 
     context = {'forum': forums}
     return render(request, "Home/forum.html", context)
+
 
 
 

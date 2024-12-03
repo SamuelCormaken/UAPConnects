@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Improved Design</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <style>
@@ -39,31 +38,54 @@
 
         }
 
-        .left-sidebar {
-            width: 30vh;
-            background-color: #101932;
-            border-radius: 15px;
-            padding: 15px;
-            color: whitesmoke;
-            height: 100%;
-            overflow-y: auto;
-        }
+        aside .left-sidebar {
+    width: 30vh;
+    background-color: #101932;
+    border-radius: 15px;
+    color: whitesmoke;
+    padding-left: 12px;
+    height: 75vh;
+    transition: ease-in 0.3s;
+}
 
-        .option h3 {
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
+    .left-sidebar h3 {
+    font-size: 15px;
+    }
+    .left-sidebar span{
+        color:aliceblue;
+    }
 
-        .option h3:hover {
-            color: #00acee;
-        }
 
-        .club-section {
-            background: #18243D;
-            border-radius: 7px;
-            padding: 10px;
-            margin-bottom: 15px;
-        }
+    .option-name {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.5rem;
+    border-radius: 4px;
+    margin-right: 10px;
+    gap: 5px;
+    transition: 0.3s ease-in;
+    }
+
+    .option-name:hover { 
+        margin-left: 0.5rem;
+        size: 30px;
+    }
+
+    .club-names {
+        margin-left: 0px;
+        margin-right: 25px;
+        border-radius: 10px;
+    }
+
+    .club-section h3{
+        background: #18243D;
+        border-radius: 7px;
+        padding-left: 20px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        margin-left:1.5rem;
+        margin-bottom: 20px;
+    }
 
         .posts-section {
             width: 60%;
@@ -95,13 +117,16 @@
             margin-bottom: 15px;
         }
 
-        .profile-pic {
-            width: 50px;
-            height: 50px;
+        .profile-pic{
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            margin-right: 15px;
+            object-fit: cover;
+            border: 3px solid #2a3140;
         }
-
+        .user-info{
+            margin-left: 8px;
+        }
         .user-info h4 {
             margin: 0;
             font-size: 1.1rem;
@@ -214,6 +239,11 @@
         .post-btn:hover{
              background-color:rgb(41, 85, 133);
         }
+
+        .navbar .section{
+            gap:64px;
+            margin-left:5rem;
+        }
         /* @media (max-width: 768px) {
             .container {
                 grid-template-columns: 1fr;
@@ -287,22 +317,47 @@
 <body>
     <div class="container">
         <!-- Left Sidebar -->
-        <aside class="left-sidebar">
-            <div class="option">
-                <h3>Forum</h3>
-                <h3>Clubs</h3>
-                <div class="club-section">
-                    <h4>CSE</h4>
-                    <p>Software and Hardware Club</p>
-                    <p>Competitive Programming</p>
-                    <p>Robotics</p>
+        <aside>
+            <div class="left-sidebar">
+                <div class="option">
+                    <a href="{% url 'forum' %}" class="option-name">
+                        <span class="material-symbols-outlined">
+                            forum
+                        </span>
+                        <h3>Forum</h3>
+                    </a>
+                    <a href="{% url 'clubdetails' %}" class="option-name">
+                        <span class="material-symbols-outlined">
+                            groups
+                        </span>
+                        <h3>Clubs</h3>
+                    </a>
+                    <div class="club-dropdown">
+                        <div class="club-names">
+                            <div class="club-section">
+                                <h3>Software & Hardware</h3>
+                            </div>
+                            <div class="club-section">
+                                <h3>Research Club</h3>
+                            </div>
+                            <div class="club-section">
+                                <h3>Math Club</h3>
+                            </div>
+                            <div class="club-section">
+                                <h3>Programming Club</h3>
+                            </div>
+                            <div class="club-section">
+                                <h3>Sports Club</h3>
+                            </div>
+                        </div>
+                    </div>    
+                    <a href="{% url 'resources' %}" class="option-name">
+                        <span class="material-symbols-outlined">
+                            docs
+                        </span>
+                        <h3>Resources</h3>
+                    </a>
                 </div>
-                <div class="club-section">
-                    <h4>EEE</h4>
-                    <p>MSI Lab</p>
-                    <p>Mathematics</p>
-                </div>
-                <h3>Resources</h3>
             </div>
         </aside>
 
@@ -311,7 +366,12 @@
            {% for f in forum %}
             <div class="post-body">
                 <div class="post-header">
-                    <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
+                    {% if f.user.profile.image and f.user.profile.image.url %}
+                    <img src="{{ f.user.profile.image.url }}" alt="Profile Picture" class="profile-pic">
+                {% else %}
+                 <!-- Fallback to a default image -->
+                 <img src="/media/profile_pictures/default.jpg" alt="Default Profile Picture" class="profile-pic">
+                {% endif %}
                     <div class="user-info">
                         {{f.user}}
                     </div>

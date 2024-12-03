@@ -4,18 +4,17 @@
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 {% block content %}
-
     <div class="container">
         <aside>
             <div class="left-sidebar">
                 <div class="option">
-                    <a href="#" class="option-name">
+                    <a href="{% url 'forum' %}" class="option-name">
                         <span class="material-symbols-outlined">
                             forum
                         </span>
                         <h3>Forum</h3>
                     </a>
-                    <a href="" class="option-name">
+                    <a href="{% url 'clubdetails' %}" class="option-name">
                         <span class="material-symbols-outlined">
                             groups
                         </span>
@@ -24,33 +23,23 @@
                     <div class="club-dropdown">
                         <div class="club-names">
                             <div class="club-section">
-                                <div>
-                                    <h3>CSE</h3>
-                                    <a href="#">
-                                        <h4>Software and Hardware Club</h4>
-                                    </a>
-                                    <a href="#">
-                                        <h4>Competitive Programming</h4>
-                                    </a>
-                                    <a href="#">
-                                        <h4>Robotics</h4>
-                                    </a>
-                                </div>
+                                <h3>Software & Hardware</h3>
                             </div>
                             <div class="club-section">
-                                <h3>EEE</h3>
-                                <a href="#">
-                                    <h4>MSI Lab</h4>
-                                </a>
-                                <a href="#">
-                                    <h4>Mathematics</h4>
-                                </a>
+                                <h3>Research Club</h3>
+                            </div>
+                            <div class="club-section">
+                                <h3>Math Club</h3>
+                            </div>
+                            <div class="club-section">
+                                <h3>Programming Club</h3>
+                            </div>
+                            <div class="club-section">
+                                <h3>Sports Club</h3>
                             </div>
                         </div>
-                    </div>
-        
-        
-                    <a href="#" class="option-name">
+                    </div>    
+                    <a href="{% url 'resources' %}" class="option-name">
                         <span class="material-symbols-outlined">
                             docs
                         </span>
@@ -64,10 +53,14 @@
         {% for p in post %}
         <div class="post-body">
             <div class="post-header">
-                <img src="{{ p.image.url }}" alt="Profile Picture" class="profile-pic">
+                {% if p.user.profile.image and p.user.profile.image.url %}
+                    <img src="{{ p.user.profile.image.url }}" alt="Profile Picture" class="profile-pic">
+                {% else %}
+                 <!-- Fallback to a default image -->
+                 <img src="/media/profile_pictures/default.jpg" alt="Default Profile Picture" class="profile-pic">
+                {% endif %}
                 <div class="user-info">
                     <h4>{{ p.user }}<span class="verified-badge">✔️</span></h4>
-                    <p>@JadaJackson</p>
                 </div>
 
                 <div class="button">
