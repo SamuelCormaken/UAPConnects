@@ -13,10 +13,10 @@ class ForumPost_Form(ModelForm):
         model=Forum
         exclude=['user','upvotes','downvotes']
 
-class Resource_Form(ModelForm):
+class Resource_Form(forms.ModelForm):
     class Meta:
-        model=Resources
-        exclude=['user']
+        model = Resources
+        fields = ['file_type', 'resource']
 
 class UserProfileForm(forms.ModelForm):
     username = forms.CharField(max_length=150, required=True)

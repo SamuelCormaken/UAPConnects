@@ -57,6 +57,7 @@
                     Resources
                 </h2>
             </div>
+            <br>
             <div class="secondary-title">
                 <div class="res-name">
                     <h3>Name</h3>
@@ -76,11 +77,16 @@
                         <span class="material-symbols-outlined">
                             picture_as_pdf
                         </span>
-                        {{r.user}}
+                        {{ r.user }}
                     </div>
-                    <div class="resource-date">{{r.dateuploaded}}</div>
-                    <div class="resource-file">{{r.file_type}}</div>
+                    <div class="resource-date">{{ r.dateuploaded }}</div>
+                    <div class="resource-file">{{ r.file_type }}</div>
                     <div class="side-button">
+                        <a href="{{ r.resource.url }}" download>
+                            <span class="material-symbols-outlined">
+                                download
+                            </span>
+                        </a> 
                         <a href="{% url 'update_resource' r.id %}">
                             <span class="material-symbols-outlined">
                                 edit

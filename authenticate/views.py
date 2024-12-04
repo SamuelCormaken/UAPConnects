@@ -4,9 +4,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.contrib.auth import logout
 from .models import *
 from .forms import *
+import os
+from django.conf import settings
+
 # Create your views here.
 @login_required
 def home(request):
@@ -285,12 +287,25 @@ def update_resource(request,id):
     return render(request,template_name='allforms/resourceform.html', context=context)
 
 @login_required
-def delete_resource(request,id):
-    resource = Resources.objects.get(pk=id)
+def delete_resource(request, id):
+    # Get the resource object
+    resource = get_object_or_404(Resources, pk=id)
+
     if request.method == 'POST':
+        # Delete the file from the file system if it exists
+        if resource.resource:
+            resource_path = os.path.join(settings.MEDIA_ROOT, resource.resource.name)
+            if os.path.exists(resource_path):
+                os.remove(resource_path)
+
+        # Delete the resource object from the database
         resource.delete()
+
+        # Redirect to the resources page
         return redirect('resources')
-    return render(request,template_name='allforms/deleteresource.html')
+
+    return render(request, template_name='allforms/deleteresource.html')
+
 
 
 @login_required

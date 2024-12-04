@@ -19,10 +19,6 @@ class Club(models.Model):
     description=models.TextField(max_length=250,blank=True,null=True)
 
 
-# class ClubMember(models.Model):
-#     clubId=models.ForeignKey(Club,on_delete=models.CASCADE,blank=True,null=True)
-#     user=models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
-
 
 
 
@@ -56,7 +52,7 @@ class Resources(models.Model):
         ('Custom','Custom')
     )
     file_type=models.CharField(max_length=300,choices=file_choice,blank=True,null=True)
-    resource=models.CharField(max_length=200,blank=True,null=True)
+    resource= models.FileField(upload_to='resources/', blank=True, null=True)
     dateuploaded= models.DateTimeField(default=now)
     def __str__(self) -> str:
         return self.file_type
