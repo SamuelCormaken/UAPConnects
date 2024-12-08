@@ -103,10 +103,11 @@
 }
 
 .profile-pic {
-    width: 40px;
-    height: 40px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    margin-right: 10px;
+    object-fit: cover;
+    border: 3px solid #2a3140;
 }
 .post-input {
     display: block;
@@ -217,7 +218,11 @@
         <div class="post-section">
             <div class="create-post">
                 <div class="post-header">
-                    <img src="profile-picture.jpg" alt="Profile" class="profile-pic">
+                    {% if request.user.profile.image %}
+                        <img src="{{ request.user.profile.image.url }}" alt="Profile" class="profile-pic">
+                    {% else %}
+                    <img src="/media/profile_pictures/default.jpg" alt="Default Profile" class="profile-pic">
+                    {% endif %}
                     <a href="{% url 'upload_post' %}" class="post-input">What's on your mind, {{request.user}}</a>
                 </div>
                 <div class="posts"><a href="{% url 'upload_query' %}" class="post-btn">Forum Post</a>
