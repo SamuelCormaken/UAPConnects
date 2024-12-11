@@ -87,6 +87,7 @@
                                 download
                             </span>
                         </a> 
+                        {% if request.user == r.user %}
                         <a href="{% url 'update_resource' r.id %}">
                             <span class="material-symbols-outlined">
                                 edit
@@ -97,6 +98,7 @@
                                 delete
                             </span>
                         </a>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
